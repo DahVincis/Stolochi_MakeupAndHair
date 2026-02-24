@@ -182,7 +182,13 @@ async function getSheet(range: string): Promise<string[][]> {
 // ---------------------------------------------------------------------------
 
 export async function getServices(): Promise<Service[]> {
-  const rows = await getSheet("Services!A2:F100");
+  let rows: string[][] = [];
+  try {
+    rows = await getSheet("Services!A2:F100");
+  } catch (err) {
+    console.warn("[sheets] getServices failed, using mock data:", (err as Error).message);
+    return mockServices;
+  }
 
   if (rows.length === 0) return mockServices;
 
@@ -199,7 +205,13 @@ export async function getServices(): Promise<Service[]> {
 }
 
 export async function getTestimonials(): Promise<Testimonial[]> {
-  const rows = await getSheet("Testimonials!A2:F100");
+  let rows: string[][] = [];
+  try {
+    rows = await getSheet("Testimonials!A2:F100");
+  } catch (err) {
+    console.warn("[sheets] getTestimonials failed, using mock data:", (err as Error).message);
+    return mockTestimonials;
+  }
 
   if (rows.length === 0) return mockTestimonials;
 
@@ -216,7 +228,13 @@ export async function getTestimonials(): Promise<Testimonial[]> {
 }
 
 export async function getGallery(): Promise<GalleryItem[]> {
-  const rows = await getSheet("Gallery!A2:E100");
+  let rows: string[][] = [];
+  try {
+    rows = await getSheet("Gallery!A2:E100");
+  } catch (err) {
+    console.warn("[sheets] getGallery failed, using mock data:", (err as Error).message);
+    return mockGallery;
+  }
 
   if (rows.length === 0) return mockGallery;
 
