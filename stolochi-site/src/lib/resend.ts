@@ -85,7 +85,8 @@ export async function sendContactEmail(data: ContactFormData): Promise<void> {
   `;
 
   await resend.emails.send({
-    from: "Stolochi Website <noreply@stolochimakeuphair.com>",
+    // TODO: change to "Stolochi Website <noreply@stolochimakeuphair.com>" once domain is verified in Resend
+    from: "Stolochi Website <onboarding@resend.dev>",
     to: [ownerEmail],
     replyTo: data.email,
     subject: `New inquiry from ${data.name}${data.eventDate ? ` — ${data.eventDate}` : ""}`,
