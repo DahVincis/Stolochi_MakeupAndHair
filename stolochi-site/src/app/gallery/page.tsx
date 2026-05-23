@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { getGallery } from "@/lib/sheets";
 import GalleryGrid from "@/components/sections/GalleryGrid";
 
-export const revalidate = 86400;
-
 export const metadata: Metadata = {
   title: "Gallery",
   description:

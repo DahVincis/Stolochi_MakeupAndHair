@@ -3,8 +3,6 @@ import { getServices } from "@/lib/sheets";
 import ServicesGrid from "@/components/sections/ServicesGrid";
 import Button from "@/components/ui/Button";
 
-export const revalidate = 86400;
-
 export const metadata: Metadata = {
   title: "Services",
   description:

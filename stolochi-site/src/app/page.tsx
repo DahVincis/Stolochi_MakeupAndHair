@@ -5,8 +5,6 @@ import TestimonialsCarousel from "@/components/sections/TestimonialsCarousel";
 import GalleryGrid from "@/components/sections/GalleryGrid";
 import Button from "@/components/ui/Button";
 
-export const revalidate = 86400;
-
 export default async function HomePage() {
   const [services, testimonials, gallery] = await Promise.all([
     getServices(),

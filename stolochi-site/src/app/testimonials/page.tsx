@@ -3,8 +3,6 @@ import { getTestimonials } from "@/lib/sheets";
 import TestimonialsCarousel from "@/components/sections/TestimonialsCarousel";
 import Button from "@/components/ui/Button";
 
-export const revalidate = 86400;
-
 export const metadata: Metadata = {
   title: "Testimonials",
   description:

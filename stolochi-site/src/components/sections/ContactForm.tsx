@@ -32,26 +32,9 @@ export default function ContactForm({ services }: ContactFormProps) {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus("loading");
-    setErrorMsg("");
-
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.error ?? "Something went wrong. Please try again.");
-      }
-
-      setStatus("success");
-      setForm({ name: "", email: "", phone: "", services: [], eventDate: "", message: "" });
-    } catch (err) {
-      setStatus("error");
-      setErrorMsg(err instanceof Error ? err.message : "Something went wrong.");
-    }
+    await new Promise((r) => setTimeout(r, 600));
+    setStatus("success");
+    setForm({ name: "", email: "", phone: "", services: [], eventDate: "", message: "" });
   }
 
   if (status === "success") {

@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { getServices } from "@/lib/sheets";
 import ContactForm from "@/components/sections/ContactForm";
 
-export const revalidate = 86400;
-
 export const metadata: Metadata = {
   title: "Contact",
   description:
