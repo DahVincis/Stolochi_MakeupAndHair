@@ -20,6 +20,19 @@ export async function sendContactEmail(data: ContactFormData): Promise<void> {
     throw new Error("Email configuration is missing. Set RESEND_API_KEY and OWNER_EMAIL.");
   }
 
+  // OWNER_EMAIL may list several inboxes, comma-separated.
+  // NOTE: while sending from the shared onboarding@resend.dev address, Resend
+  // only delivers to the Resend account's own email -- any other recipient
+  // fails the whole send. Multiple recipients need a verified domain first.
+  const recipients = ownerEmail
+    .split(",")
+    .map((address) => address.trim())
+    .filter(Boolean);
+
+  if (recipients.length === 0) {
+    throw new Error("OWNER_EMAIL is set but contains no address.");
+  }
+
   const { Resend } = await import("resend");
   const resend = new Resend(apiKey);
 
@@ -108,7 +121,7 @@ export async function sendContactEmail(data: ContactFormData): Promise<void> {
   const { error } = await resend.emails.send({
     // TODO: change to "Stolochi Website <noreply@stolochimakeuphair.com>" once domain is verified in Resend
     from: "Stolochi Website <onboarding@resend.dev>",
-    to: [ownerEmail],
+    to: recipients,
     replyTo: data.email,
     subject: `New inquiry from ${data.name}${data.eventDate ? ` — ${data.eventDate}` : ""}`,
     html,
