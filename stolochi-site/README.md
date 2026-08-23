@@ -27,7 +27,7 @@ sample content in `src/lib/sheets.ts` rather than rendering empty pages.
 | ------------------------------- | ------- | -------------------------------------------- |
 | `GOOGLE_SHEETS_SPREADSHEET_ID`  | var     | Which sheet to read (set in `wrangler.jsonc`) |
 | `RESEND_API_KEY`                | secret  | Sending contact-form email via Resend        |
-| `OWNER_EMAIL`                   | secret  | Inbox that receives contact-form submissions |
+| `OWNER_EMAIL`                   | secret  | Inbox(es) receiving inquiries, comma-separated |
 | `NEXT_PUBLIC_SITE_URL`          | build   | Canonical origin, used by sitemap / robots   |
 
 Reading the sheet needs **no API key and no service account** — it uses Google's
@@ -37,8 +37,9 @@ link can change whatever the sheet grants them.
 
 Local: `.env.local` for `npm run dev`, `.dev.vars` for `npm run preview`
 (both git-ignored).
-Production: `npx wrangler secret put <NAME>` for each — takes effect immediately,
-no redeploy needed.
+Production: `npx wrangler secret put <NAME>` for each, **run from this directory**
+so wrangler can read the Worker name from `wrangler.jsonc`. Takes effect
+immediately, no redeploy needed.
 
 ## Commands
 
@@ -57,7 +58,10 @@ production does. Verify anything non-trivial with `preview`.
 
 - The contact form posts to `/api/contact`, which validates input, rejects bots
   via a honeypot field, and is rate-limited to 5 submissions per minute per IP.
-- Emails currently send from `onboarding@resend.dev`. Once a domain is verified
-  in Resend, switch the `from:` address in `src/lib/resend.ts`.
+- Emails currently send from `onboarding@resend.dev`, and **`OWNER_EMAIL` is set
+  to the developer's inbox, not the client's** — Resend's test sender only
+  delivers to the Resend account's own address, so any other recipient fails the
+  whole send. Verify a domain at resend.com/domains and change the `from:` in
+  `src/lib/resend.ts` before repointing it. See [CLAUDE.md](../CLAUDE.md).
 - Images are served unoptimized; Next's image optimizer on Workers requires paid
   Cloudflare Images.
