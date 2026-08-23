@@ -9,6 +9,9 @@ export const metadata: Metadata = {
     "Explore bridal makeup, bridal hair, bridesmaid packages, and special occasion services offered by Stolochi Makeup & Hair in Durham, NC.",
 };
 
+// Sheet data is read per request, never prerendered.
+export const dynamic = "force-dynamic";
+
 export default async function ServicesPage() {
   const services = await getServices();
 

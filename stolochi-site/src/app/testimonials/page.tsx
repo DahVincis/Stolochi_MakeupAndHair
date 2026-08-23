@@ -9,6 +9,9 @@ export const metadata: Metadata = {
     "Read what brides and clients say about Stolochi Makeup & Hair in Durham, NC. Real reviews from real weddings and special occasions.",
 };
 
+// Sheet data is read per request, never prerendered.
+export const dynamic = "force-dynamic";
+
 export default async function TestimonialsPage() {
   const testimonials = await getTestimonials();
 

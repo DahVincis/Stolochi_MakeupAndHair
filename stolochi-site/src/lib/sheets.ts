@@ -1,4 +1,5 @@
 import { type Service, type Testimonial, type GalleryItem } from "@/types";
+import { parseCsv } from "./csv";
 
 // ---------------------------------------------------------------------------
 // Mock data — used when GOOGLE_SHEETS_SPREADSHEET_ID is not set (local dev)
@@ -175,34 +176,34 @@ const mockGallery: GalleryItem[] = [
 
 // ---------------------------------------------------------------------------
 // Google Sheets helpers
+//
+// ponytail: one Sheets fetch per request, no cache, so the owner's spreadsheet
+// edits show up on the next page load. Add `revalidate` + an R2 incremental
+// cache if traffic ever makes that a cost or a rate-limit problem.
 // ---------------------------------------------------------------------------
 
-async function getSheet(range: string): Promise<string[][]> {
+/**
+ * Reads one tab of the sheet as rows, header row dropped.
+ *
+ * Uses Google's CSV export, which needs no API key or service account — only
+ * that the sheet is shared as "anyone with the link". Returns [] when
+ * unconfigured so callers fall back to the sample content above.
+ */
+async function getSheet(tab: string): Promise<string[][]> {
   const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
-  const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-  const privateKey = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY;
+  if (!spreadsheetId) return [];
 
-  if (!spreadsheetId || !serviceAccountEmail || !privateKey) {
-    return [];
+  const url =
+    `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq` +
+    `?tqx=out:csv&sheet=${encodeURIComponent(tab)}`;
+
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) {
+    throw new Error(`Sheet "${tab}" returned ${res.status} (is it link-shared?)`);
   }
 
-  const { google } = await import("googleapis");
-
-  const auth = new google.auth.GoogleAuth({
-    credentials: {
-      client_email: serviceAccountEmail,
-      private_key: privateKey.replace(/\\n/g, "\n"),
-    },
-    scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
-  });
-
-  const sheets = google.sheets({ version: "v4", auth });
-  const response = await sheets.spreadsheets.values.get({
-    spreadsheetId,
-    range,
-  });
-
-  return (response.data.values as string[][]) ?? [];
+  const rows = parseCsv(await res.text());
+  return rows.slice(1); // drop the header row
 }
 
 // ---------------------------------------------------------------------------
@@ -212,7 +213,7 @@ async function getSheet(range: string): Promise<string[][]> {
 export async function getServices(): Promise<Service[]> {
   let rows: string[][] = [];
   try {
-    rows = await getSheet("Services!A2:F100");
+    rows = await getSheet("Services");
   } catch (err) {
     console.warn("[sheets] getServices failed, using mock data:", (err as Error).message);
     return mockServices;
@@ -235,7 +236,7 @@ export async function getServices(): Promise<Service[]> {
 export async function getTestimonials(): Promise<Testimonial[]> {
   let rows: string[][] = [];
   try {
-    rows = await getSheet("Testimonials!A2:F100");
+    rows = await getSheet("Testimonials");
   } catch (err) {
     console.warn("[sheets] getTestimonials failed, using mock data:", (err as Error).message);
     return mockTestimonials;
@@ -258,7 +259,7 @@ export async function getTestimonials(): Promise<Testimonial[]> {
 export async function getGallery(): Promise<GalleryItem[]> {
   let rows: string[][] = [];
   try {
-    rows = await getSheet("Gallery!A2:E100");
+    rows = await getSheet("Gallery");
   } catch (err) {
     console.warn("[sheets] getGallery failed, using mock data:", (err as Error).message);
     return mockGallery;

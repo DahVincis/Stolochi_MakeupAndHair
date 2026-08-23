@@ -17,6 +17,8 @@ export default function ContactForm({ services }: ContactFormProps) {
     eventDate: "",
     message: "",
   });
+  // Bots fill hidden fields; humans never see this one.
+  const [honeypot, setHoneypot] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -32,9 +34,27 @@ export default function ContactForm({ services }: ContactFormProps) {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus("loading");
-    await new Promise((r) => setTimeout(r, 600));
-    setStatus("success");
-    setForm({ name: "", email: "", phone: "", services: [], eventDate: "", message: "" });
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, website: honeypot }),
+      });
+
+      if (!res.ok) {
+        const { error } = (await res.json().catch(() => ({}))) as { error?: string };
+        setErrorMsg(error ?? "Something went wrong. Please try again.");
+        setStatus("error");
+        return;
+      }
+
+      setStatus("success");
+      setForm({ name: "", email: "", phone: "", services: [], eventDate: "", message: "" });
+    } catch {
+      setErrorMsg("Could not reach the server. Please check your connection and try again.");
+      setStatus("error");
+    }
   }
 
   if (status === "success") {
@@ -61,6 +81,17 @@ export default function ContactForm({ services }: ContactFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        value={honeypot}
+        onChange={(e) => setHoneypot(e.target.value)}
+        className="hidden"
+      />
+
       {/* Name + Email */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>

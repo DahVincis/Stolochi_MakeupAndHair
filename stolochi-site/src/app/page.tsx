@@ -5,6 +5,9 @@ import TestimonialsCarousel from "@/components/sections/TestimonialsCarousel";
 import GalleryGrid from "@/components/sections/GalleryGrid";
 import Button from "@/components/ui/Button";
 
+// Sheet data is read per request, never prerendered.
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const [services, testimonials, gallery] = await Promise.all([
     getServices(),

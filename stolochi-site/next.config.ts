@@ -1,11 +1,9 @@
 import type { NextConfig } from "next";
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
 const nextConfig: NextConfig = {
-  output: "export",
-  basePath: "/demos/stolochi",
-  trailingSlash: true,
-
   images: {
+    // Next's image optimizer needs paid Cloudflare Images; serve originals instead.
     unoptimized: true,
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
@@ -17,5 +15,8 @@ const nextConfig: NextConfig = {
     root: __dirname,
   },
 };
+
+// Makes Cloudflare bindings available in `next dev`.
+initOpenNextCloudflareForDev();
 
 export default nextConfig;

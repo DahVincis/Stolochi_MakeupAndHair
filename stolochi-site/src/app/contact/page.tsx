@@ -8,6 +8,9 @@ export const metadata: Metadata = {
     "Get in touch with Stolochi Makeup & Hair in Durham, NC. Book your bridal consultation, inquire about services, or ask any questions.",
 };
 
+// Sheet data is read per request, never prerendered.
+export const dynamic = "force-dynamic";
+
 export default async function ContactPage() {
   const services = await getServices();
 

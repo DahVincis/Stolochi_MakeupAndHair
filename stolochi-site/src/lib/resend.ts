@@ -1,5 +1,17 @@
 import { type ContactFormData } from "@/types";
 
+const HTML_ESCAPES: Record<string, string> = {
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&#39;",
+};
+
+function esc(value: string): string {
+  return value.replace(/[&<>"']/g, (c) => HTML_ESCAPES[c]);
+}
+
 export async function sendContactEmail(data: ContactFormData): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY;
   const ownerEmail = process.env.OWNER_EMAIL;
@@ -11,8 +23,15 @@ export async function sendContactEmail(data: ContactFormData): Promise<void> {
   const { Resend } = await import("resend");
   const resend = new Resend(apiKey);
 
-  const servicesLine =
-    data.services.length > 0 ? data.services.join(", ") : "Not specified";
+  // Every field below is attacker-controlled; escape before it goes into HTML.
+  const name = esc(data.name);
+  const email = esc(data.email);
+  const phone = esc(data.phone);
+  const eventDate = esc(data.eventDate);
+  const message = esc(data.message).replace(/\n/g, "<br>");
+  const servicesLine = esc(
+    data.services.length > 0 ? data.services.join(", ") : "Not specified",
+  );
 
   const html = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #2C2C2C;">
@@ -32,7 +51,7 @@ export async function sendContactEmail(data: ContactFormData): Promise<void> {
               Name
             </td>
             <td style="padding: 10px 0; border-bottom: 1px solid #E8E2DC; font-size: 14px; font-weight: 600;">
-              ${data.name}
+              ${name}
             </td>
           </tr>
           <tr>
@@ -40,7 +59,7 @@ export async function sendContactEmail(data: ContactFormData): Promise<void> {
               Email
             </td>
             <td style="padding: 10px 0; border-bottom: 1px solid #E8E2DC; font-size: 14px;">
-              <a href="mailto:${data.email}" style="color: #C8A96E;">${data.email}</a>
+              <a href="mailto:${email}" style="color: #C8A96E;">${email}</a>
             </td>
           </tr>
           <tr>
@@ -48,7 +67,7 @@ export async function sendContactEmail(data: ContactFormData): Promise<void> {
               Phone
             </td>
             <td style="padding: 10px 0; border-bottom: 1px solid #E8E2DC; font-size: 14px;">
-              <a href="tel:${data.phone}" style="color: #C8A96E;">${data.phone || "Not provided"}</a>
+              <a href="tel:${phone}" style="color: #C8A96E;">${phone || "Not provided"}</a>
             </td>
           </tr>
           <tr>
@@ -64,7 +83,7 @@ export async function sendContactEmail(data: ContactFormData): Promise<void> {
               Event Date
             </td>
             <td style="padding: 10px 0; border-bottom: 1px solid #E8E2DC; font-size: 14px;">
-              ${data.eventDate || "Not specified"}
+              ${eventDate || "Not specified"}
             </td>
           </tr>
           <tr>
@@ -72,7 +91,7 @@ export async function sendContactEmail(data: ContactFormData): Promise<void> {
               Message
             </td>
             <td style="padding: 10px 0; font-size: 14px; line-height: 1.6;">
-              ${data.message.replace(/\n/g, "<br>")}
+              ${message}
             </td>
           </tr>
         </table>
