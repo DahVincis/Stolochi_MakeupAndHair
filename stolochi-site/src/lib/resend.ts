@@ -103,7 +103,9 @@ export async function sendContactEmail(data: ContactFormData): Promise<void> {
     </div>
   `;
 
-  await resend.emails.send({
+  // The SDK returns { data, error } instead of throwing, so an unchecked call
+  // reports success even when Resend rejected the send.
+  const { error } = await resend.emails.send({
     // TODO: change to "Stolochi Website <noreply@stolochimakeuphair.com>" once domain is verified in Resend
     from: "Stolochi Website <onboarding@resend.dev>",
     to: [ownerEmail],
@@ -111,4 +113,8 @@ export async function sendContactEmail(data: ContactFormData): Promise<void> {
     subject: `New inquiry from ${data.name}${data.eventDate ? ` — ${data.eventDate}` : ""}`,
     html,
   });
+
+  if (error) {
+    throw new Error(`Resend rejected the send: ${error.message}`);
+  }
 }
