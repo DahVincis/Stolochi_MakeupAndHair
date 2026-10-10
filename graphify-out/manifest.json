@@ -1,0 +1,182 @@
+{
+  "stolochi-site/next.config.ts": {
+    "mtime": 1787522514.8480048,
+    "seen": 1791655181.8119512,
+    "ast_hash": "841bd111affe35432d195056c7864856",
+    "semantic_hash": "841bd111affe35432d195056c7864856"
+  },
+  "stolochi-site/open-next.config.ts": {
+    "mtime": 1787522514.8497965,
+    "seen": 1791655181.8119576,
+    "ast_hash": "46a73843249f2eb65485d65e8ded919e",
+    "semantic_hash": "46a73843249f2eb65485d65e8ded919e"
+  },
+  "stolochi-site/package.json": {
+    "mtime": 1787523852.3171782,
+    "seen": 1791655181.8119624,
+    "ast_hash": "5c7ddb4e15b0bb3c24cfb1dfb3cf3a88",
+    "semantic_hash": "5c7ddb4e15b0bb3c24cfb1dfb3cf3a88"
+  },
+  "stolochi-site/postcss.config.mjs": {
+    "mtime": 1787513972.8010533,
+    "seen": 1791655181.811966,
+    "ast_hash": "239f3ebf717465dc636818a1a619398d",
+    "semantic_hash": "239f3ebf717465dc636818a1a619398d"
+  },
+  "stolochi-site/src/app/about/page.tsx": {
+    "mtime": 1787513972.8022723,
+    "seen": 1791655181.8119693,
+    "ast_hash": "41afb9d1d38169d2e313559266bcd249",
+    "semantic_hash": "41afb9d1d38169d2e313559266bcd249"
+  },
+  "stolochi-site/src/app/api/contact/route.ts": {
+    "mtime": 1787522698.504831,
+    "seen": 1791655181.8119738,
+    "ast_hash": "8f186b9580e7f54204488cda16b76e66",
+    "semantic_hash": "8f186b9580e7f54204488cda16b76e66"
+  },
+  "stolochi-site/src/app/contact/page.tsx": {
+    "mtime": 1787522650.5809329,
+    "seen": 1791655181.8119783,
+    "ast_hash": "43629e690c088cfc5d5dae83099513db",
+    "semantic_hash": "43629e690c088cfc5d5dae83099513db"
+  },
+  "stolochi-site/src/app/gallery/page.tsx": {
+    "mtime": 1787522650.580691,
+    "seen": 1791655181.811983,
+    "ast_hash": "93f5d0d2dd31484cbd2ee512b2379354",
+    "semantic_hash": "93f5d0d2dd31484cbd2ee512b2379354"
+  },
+  "stolochi-site/src/app/layout.tsx": {
+    "mtime": 1787513972.802895,
+    "seen": 1791655181.8119879,
+    "ast_hash": "c552c822eed11eda3bd5c31eeada0977",
+    "semantic_hash": "c552c822eed11eda3bd5c31eeada0977"
+  },
+  "stolochi-site/src/app/page.tsx": {
+    "mtime": 1787522650.5804298,
+    "seen": 1791655181.8120131,
+    "ast_hash": "0d6a18d0a9873ddc86989490e31c05f1",
+    "semantic_hash": "0d6a18d0a9873ddc86989490e31c05f1"
+  },
+  "stolochi-site/src/app/robots.ts": {
+    "mtime": 1787513972.802895,
+    "seen": 1791655181.8120177,
+    "ast_hash": "dba63340fdcc24884d4dd7c7f65af698",
+    "semantic_hash": "dba63340fdcc24884d4dd7c7f65af698"
+  },
+  "stolochi-site/src/app/services/page.tsx": {
+    "mtime": 1787522650.5805616,
+    "seen": 1791655181.8120215,
+    "ast_hash": "3a9652fd7e1d2686b1b7562163958f6e",
+    "semantic_hash": "3a9652fd7e1d2686b1b7562163958f6e"
+  },
+  "stolochi-site/src/app/sitemap.ts": {
+    "mtime": 1787513972.8038979,
+    "seen": 1791655181.8120258,
+    "ast_hash": "c8b14b37428915cf85ebe17fad9f14ab",
+    "semantic_hash": "c8b14b37428915cf85ebe17fad9f14ab"
+  },
+  "stolochi-site/src/app/testimonials/page.tsx": {
+    "mtime": 1787522650.5808241,
+    "seen": 1791655181.8120308,
+    "ast_hash": "6e0773ba8c9ea5798f0bd9a188eb1558",
+    "semantic_hash": "6e0773ba8c9ea5798f0bd9a188eb1558"
+  },
+  "stolochi-site/src/components/layout/Footer.tsx": {
+    "mtime": 1787513972.8043523,
+    "seen": 1791655181.8120353,
+    "ast_hash": "2863a85a060438873b8bb2a6225b489c",
+    "semantic_hash": "2863a85a060438873b8bb2a6225b489c"
+  },
+  "stolochi-site/src/components/layout/Header.tsx": {
+    "mtime": 1787513972.8044832,
+    "seen": 1791655181.8120399,
+    "ast_hash": "51c358a3a5c6029827900dfdf6ed9b86",
+    "semantic_hash": "51c358a3a5c6029827900dfdf6ed9b86"
+  },
+  "stolochi-site/src/components/sections/ContactForm.tsx": {
+    "mtime": 1787522711.9314291,
+    "seen": 1791655181.8120444,
+    "ast_hash": "85c5d3cdf2f9407f375e13f213d58cc8",
+    "semantic_hash": "85c5d3cdf2f9407f375e13f213d58cc8"
+  },
+  "stolochi-site/src/components/sections/GalleryGrid.tsx": {
+    "mtime": 1787513972.8048275,
+    "seen": 1791655181.8120482,
+    "ast_hash": "8c930f9650638914fd2ce0fe2d8ff0a9",
+    "semantic_hash": "8c930f9650638914fd2ce0fe2d8ff0a9"
+  },
+  "stolochi-site/src/components/sections/Hero.tsx": {
+    "mtime": 1787513972.8050148,
+    "seen": 1791655181.812051,
+    "ast_hash": "946f382028fa1d8761e7fc2e656774bc",
+    "semantic_hash": "946f382028fa1d8761e7fc2e656774bc"
+  },
+  "stolochi-site/src/components/sections/ServicesGrid.tsx": {
+    "mtime": 1787513972.8051233,
+    "seen": 1791655181.8120553,
+    "ast_hash": "86600948493a23e0c6e66bab49964f76",
+    "semantic_hash": "86600948493a23e0c6e66bab49964f76"
+  },
+  "stolochi-site/src/components/sections/TestimonialsCarousel.tsx": {
+    "mtime": 1787513972.8052406,
+    "seen": 1791655181.8120582,
+    "ast_hash": "d5f2a9de0dc488e51cb2cad625a8cb49",
+    "semantic_hash": "d5f2a9de0dc488e51cb2cad625a8cb49"
+  },
+  "stolochi-site/src/components/ui/Button.tsx": {
+    "mtime": 1787513972.8053825,
+    "seen": 1791655181.812063,
+    "ast_hash": "35e205854b3f51a722afed0c68c7e1a9",
+    "semantic_hash": "35e205854b3f51a722afed0c68c7e1a9"
+  },
+  "stolochi-site/src/components/ui/SectionHeading.tsx": {
+    "mtime": 1787513972.8054914,
+    "seen": 1791655181.8120673,
+    "ast_hash": "83c9efd7bdbc5f1e788627bc517a3fb2",
+    "semantic_hash": "83c9efd7bdbc5f1e788627bc517a3fb2"
+  },
+  "stolochi-site/src/lib/csv.test.ts": {
+    "mtime": 1787523836.7226622,
+    "seen": 1791655181.8120708,
+    "ast_hash": "cfe759fa1c885c9201673b927fdd47d6",
+    "semantic_hash": "cfe759fa1c885c9201673b927fdd47d6"
+  },
+  "stolochi-site/src/lib/csv.ts": {
+    "mtime": 1787523836.7186623,
+    "seen": 1791655181.8120754,
+    "ast_hash": "4d2eb4aa20259eff76fa259041362cc3",
+    "semantic_hash": "4d2eb4aa20259eff76fa259041362cc3"
+  },
+  "stolochi-site/src/lib/resend.ts": {
+    "mtime": 1787525479.4466965,
+    "seen": 1791655181.81208,
+    "ast_hash": "96da61e7614c8e6124b57dccb6012ce5",
+    "semantic_hash": "96da61e7614c8e6124b57dccb6012ce5"
+  },
+  "stolochi-site/src/lib/sheets.ts": {
+    "mtime": 1787523852.3080077,
+    "seen": 1791655181.8120847,
+    "ast_hash": "d093e0f7557499ac31ef2a0b522c89b4",
+    "semantic_hash": "d093e0f7557499ac31ef2a0b522c89b4"
+  },
+  "stolochi-site/src/types/index.ts": {
+    "mtime": 1787513972.806111,
+    "seen": 1791655181.812087,
+    "ast_hash": "49d5063d50243a2b3a1f86e34b6c3d55",
+    "semantic_hash": "49d5063d50243a2b3a1f86e34b6c3d55"
+  },
+  "stolochi-site/test-contact.sh": {
+    "mtime": 1787523235.4821951,
+    "seen": 1791655181.8120918,
+    "ast_hash": "f6420fd327aecc14e4080b4e28d23835",
+    "semantic_hash": "f6420fd327aecc14e4080b4e28d23835"
+  },
+  "stolochi-site/tsconfig.json": {
+    "mtime": 1787523852.316909,
+    "seen": 1791655181.8120968,
+    "ast_hash": "282006cefb66865aee9714b77556341c",
+    "semantic_hash": "282006cefb66865aee9714b77556341c"
+  }
+}
